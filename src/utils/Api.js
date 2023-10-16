@@ -16,7 +16,7 @@ export const fethchDataFromAPI = async (url, params) => {
     });
     return data;
   } catch (error) {
-    console.log(error);
+    console.log(`error from api: ${error}`);
     return error;
   }
 };
