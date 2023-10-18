@@ -14,7 +14,7 @@ import CircularProgress from 'react-native-circular-progress-indicator';
 
 const Search = ({navigation}) => {
   const [mediaName, setMediaName] = useState('');
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState('marvel');
   const [page, setPage] = useState(1);
 
   const {data, loading} = useFetch(`/search/multi?query=${query}&page=${page}`);
@@ -98,7 +98,7 @@ const Search = ({navigation}) => {
         </View>
         <TouchableOpacity>
           <Image
-            source={require('../images/search.png')}
+            source={require('../images/mic.png')}
             style={styles.searchIcon}
           />
         </TouchableOpacity>
