@@ -21,7 +21,7 @@ const Similar = ({data, loading, id, midPoint}) => {
       <ScrollView showsHorizontalScrollIndicator={false} horizontal>
         {data?.results.map((item, index) => {
           const inputDate =
-            item?.first_air_date || item?.release_date || '1999 - 09 - 09';
+            item?.first_air_date || item?.release_date || '1999-09-09';
           const formattedDate = format(new Date(inputDate), 'MMMM dd, yyyy');
           return (
             <TouchableOpacity

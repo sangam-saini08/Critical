@@ -49,7 +49,7 @@ const Details = ({route, navigation}) => {
           />
           <Text style={styles.logotxt}>{'Critical'}</Text>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Search')}>
           <Image
             source={require('../images/search.png')}
             style={styles.searchIcon}
@@ -113,7 +113,9 @@ const Details = ({route, navigation}) => {
           {/* Midlleview  */}
           <View>
             <Text style={{color: 'white', fontSize: 18}}>Release Date:</Text>
-            <Text style={{color: 'gray'}}>{data?.release_date}</Text>
+            <Text style={{color: 'gray'}}>
+              {data?.release_date || '01/01/2000'}
+            </Text>
           </View>
 
           {/* RIghtviw  */}
