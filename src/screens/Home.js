@@ -95,7 +95,10 @@ const Home = ({navigation}) => {
             <View style={styles.logoView}>
               <Text style={styles.logotxt}>Criticall</Text>
             </View>
-            <TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('Search');
+              }}>
               <Image
                 source={require('../images/search.png')}
                 style={styles.searchIcon}

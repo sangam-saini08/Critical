@@ -47,7 +47,7 @@ const Details = ({route, navigation}) => {
             source={require('../images/movix-logo.png')}
             style={{width: 20, height: 20}}
           />
-          <Text style={styles.logotxt}>{id}</Text>
+          <Text style={styles.logotxt}>{'Critical'}</Text>
         </View>
         <TouchableOpacity>
           <Image
