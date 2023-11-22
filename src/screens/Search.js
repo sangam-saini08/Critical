@@ -8,19 +8,44 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {TextInput} from 'react-native-gesture-handler';
-import useFetch from '../hooks/useFetch';
 import {format} from 'date-fns';
 import CircularProgress from 'react-native-circular-progress-indicator';
+import {fethchDataFromAPI} from '../utils/Api';
 
 const Search = ({navigation}) => {
   const [mediaName, setMediaName] = useState('');
+  const [data, setData] = useState(null);
   const [query, setQuery] = useState('marvel');
-  const [page, setPage] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const [pageNum, setPageNum] = useState(1);
 
-  const {data, loading} = useFetch(`/search/multi?query=${query}&page=${page}`);
   //   console.log(JSON.stringify(data));
   const handleSearch = () => {
     setQuery(mediaName);
+    setLoading(true);
+    fethchDataFromAPI(`/search/multi?query=${query}&page=${pageNum}`).then(
+      res => {
+        setData(res);
+        setPageNum(prev => prev + 1);
+        setLoading(false);
+      },
+    );
+  };
+
+  const fetchNextPageData = () => {
+    fethchDataFromAPI(`/search/multi?query=${query}&page=${pageNum}`).then(
+      res => {
+        if (data?.results) {
+          setData({
+            ...data,
+            results: [...data?.results, ...res.results],
+          });
+        } else {
+          setData(res);
+        }
+        setPageNum(prev => prev + 1);
+      },
+    );
   };
 
   const renderItem = ({item, index}) => {
@@ -127,7 +152,7 @@ const Search = ({navigation}) => {
           renderItem={renderItem}
           numColumns={2}
           showsVerticalScrollIndicator={false}
-          // onEndReached={() => setPage(page + 1)}
+          onEndReached={() => fetchNextPageData()}
         />
       </View>
     </View>
